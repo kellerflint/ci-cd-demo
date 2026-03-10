@@ -60,7 +60,7 @@ On your deployment server (e.g., the Orange Pi):
 
 ### 2. Create an SSH Key Pair
 
-On your deployment server, generate a key pair for CI and add it to authorized keys:
+On your deployment server, generate a key pair and add it to authorized keys:
 
 ```bash
 ssh-keygen -t ed25519 -f ~/.ssh/deploy_key -N ""
