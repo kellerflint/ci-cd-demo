@@ -3,8 +3,8 @@ services:
   db:
     image: mysql:8
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: todoapp
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-todoapp}
     volumes:
       - db_data:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -17,10 +17,10 @@ services:
   server:
     build: ./server
     environment:
-      DB_HOST: db
-      DB_USER: root
-      DB_PASSWORD: rootpassword
-      DB_NAME: todoapp
+      DB_HOST: ${DB_HOST:-db}
+      DB_USER: ${DB_USER:-root}
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+      DB_NAME: ${MYSQL_DATABASE:-todoapp}
     depends_on:
       db:
         condition: service_healthy
